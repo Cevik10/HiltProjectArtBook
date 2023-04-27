@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.hakancevik.hiltprojectartbook.R
+
 import com.hakancevik.hiltprojectartbook.databinding.FragmentArtsBinding
 
 class ArtsFragment : Fragment() {

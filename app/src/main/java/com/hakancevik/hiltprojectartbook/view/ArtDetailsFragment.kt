@@ -1,14 +1,17 @@
 package com.hakancevik.hiltprojectartbook.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import com.hakancevik.hiltprojectartbook.R
 import com.hakancevik.hiltprojectartbook.databinding.FragmentArtDetailsBinding
 
-class ArtDetailsFragment : Fragment() {
+class ArtDetailsFragment() : Fragment() {
 
 
     private var _binding: FragmentArtDetailsBinding? = null
@@ -32,7 +35,25 @@ class ArtDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.artImageView.setOnClickListener {
+            val action = ArtDetailsFragmentDirections.actionArtDetailsFragmentToImageApiFragment()
+            findNavController().navigate(action)
+        }
 
+        onBackPressedCallback()
+
+
+    }
+
+    private fun onBackPressedCallback() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
     override fun onDestroyView() {
