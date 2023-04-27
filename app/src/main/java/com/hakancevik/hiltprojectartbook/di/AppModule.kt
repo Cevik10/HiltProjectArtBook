@@ -32,7 +32,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectRetrofitAPI(): PixabayAPI {
+    fun injectPixabayAPI(): PixabayAPI {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
