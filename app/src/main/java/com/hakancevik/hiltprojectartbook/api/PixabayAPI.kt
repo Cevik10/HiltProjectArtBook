@@ -12,6 +12,6 @@ interface PixabayAPI {
     suspend fun imageSearch(
         @Query("q") searchQuery: String,
         @Query("key") apiKey: String = API_KEY
-    ) : Response<ImageResponse>
+    ): Response<ImageResponse>
 
 }
