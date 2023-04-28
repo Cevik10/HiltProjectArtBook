@@ -5,6 +5,7 @@ import com.hakancevik.hiltprojectartbook.model.Art
 import com.hakancevik.hiltprojectartbook.model.ImageResponse
 import com.hakancevik.hiltprojectartbook.util.Resource
 
+
 interface ArtRepositoryInterface {
 
     suspend fun insertArt(art: Art)
