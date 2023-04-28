@@ -3,7 +3,13 @@ package com.hakancevik.hiltprojectartbook.di
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.hakancevik.hiltprojectartbook.R
 import com.hakancevik.hiltprojectartbook.api.PixabayAPI
+import com.hakancevik.hiltprojectartbook.repo.ArtRepository
+import com.hakancevik.hiltprojectartbook.repo.ArtRepositoryInterface
+import com.hakancevik.hiltprojectartbook.roomdb.ArtDao
 import com.hakancevik.hiltprojectartbook.roomdb.ArtDatabase
 import com.hakancevik.hiltprojectartbook.util.Util.BASE_URL
 import dagger.Module
@@ -38,7 +44,21 @@ object AppModule {
             .baseUrl(BASE_URL)
             .build()
             .create(PixabayAPI::class.java)
+
     }
+
+    @Singleton
+    @Provides
+    fun injectNormalRepo(dao: ArtDao, api: PixabayAPI) = ArtRepository(dao, api) as ArtRepositoryInterface
+
+
+    @Singleton
+    @Provides
+    fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
+        .setDefaultRequestOptions(
+            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+        )
 
 
 }

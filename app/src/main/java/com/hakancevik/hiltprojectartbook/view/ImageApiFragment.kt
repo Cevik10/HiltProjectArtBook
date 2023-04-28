@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hakancevik.hiltprojectartbook.R
+import com.hakancevik.hiltprojectartbook.adapter.ImageRecyclerAdapter
 import com.hakancevik.hiltprojectartbook.databinding.FragmentImageApiBinding
+import javax.inject.Inject
 
-class ImageApiFragment : Fragment() {
+class ImageApiFragment @Inject constructor(
+    private val imageRecyclerAdapter: ImageRecyclerAdapter
+): Fragment() {
 
     private var _binding: FragmentImageApiBinding? = null
     private val binding get() = _binding!!

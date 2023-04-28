@@ -5,15 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
+
 import androidx.navigation.fragment.findNavController
+import com.hakancevik.hiltprojectartbook.adapter.ArtRecyclerAdapter
 
 import com.hakancevik.hiltprojectartbook.databinding.FragmentArtsBinding
+import com.hakancevik.hiltprojectartbook.viewmodel.ArtsViewModel
+import javax.inject.Inject
 
-class ArtsFragment : Fragment() {
+class ArtsFragment @Inject constructor(
+    val artRecyclerAdapter: ArtRecyclerAdapter
+) : Fragment() {
 
     private var _binding: FragmentArtsBinding? = null
     private val binding get() = _binding!!
+
+    lateinit var viewModel: ArtsViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +41,8 @@ class ArtsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(requireActivity()).get(ArtsViewModel::class.java)
 
 
         binding.fab.setOnClickListener {
