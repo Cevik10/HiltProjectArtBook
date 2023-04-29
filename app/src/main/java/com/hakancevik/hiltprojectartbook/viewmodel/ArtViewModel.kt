@@ -15,8 +15,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtViewModel @Inject constructor(
-    val repository: ArtRepositoryInterface
+    private val repository: ArtRepositoryInterface
 ) : ViewModel() {
+
+    val selectImageText = MutableLiveData<Boolean>()
+    val selectImageView = MutableLiveData<Boolean>()
+
 
     val artList = repository.getArt()
 
@@ -36,6 +40,9 @@ class ArtViewModel @Inject constructor(
 
     fun insertArt(art: Art) = viewModelScope.launch {
         repository.insertArt(art)
+
+        selectImageText.value = true
+        selectImageView.value = false
     }
 
     private val selectedImage = MutableLiveData<String>()
@@ -45,6 +52,8 @@ class ArtViewModel @Inject constructor(
     fun setSelectedImage(url: String) {
         selectedImage.postValue(url)
         //selectedImage.value = url
+        selectImageText.value = false
+        selectImageView.value = true
     }
 
     fun makeArt(name: String, artistName: String, year: String) {

@@ -6,19 +6,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/artImageView"
+
+    <RelativeLayout
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="26dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="23dp">
+
+        <ImageView
+            android:id="@+id/artImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:visibility="gone" />
 
 
-    <EditText
-        android:id="@+id/nameText"
+        <TextView
+            android:id="@+id/selectImageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@drawable/fg_select_image_ripple"
+            android:clickable="true"
+            android:drawablePadding="3dp"
+            android:focusable="true"
+            android:foreground="@drawable/bg_select_image"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:text="Select image"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:drawableLeftCompat="@drawable/ic_select_image" />
+
+
+    </RelativeLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,42 +61,67 @@
         android:layout_marginTop="13dp"
         android:ems="10"
         android:hint="Enter Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName">
 
-    <EditText
-        android:id="@+id/artistText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="51dp"
-        android:layout_marginTop="21dp"
-
+        android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="Enter Artist"
-        android:inputType="textPersonName" />
+        android:hint="Artist Name"
+        android:inputType="textPersonName">
 
-    <EditText
-        android:id="@+id/yearText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/artistText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="51dp"
-        android:layout_marginTop="21dp"
-
+        android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="Enter Year"
-        android:inputType="textPersonName" />
+        android:hint="Year"
+        android:inputType="textPersonName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/yearText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/saveButton"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="51dp"
+        android:layout_marginTop="21dp"
         android:layout_marginBottom="108dp"
-        android:layout_marginTop="31dp"
-        android:padding="7dp"
+        android:elevation="7dp"
+        android:padding="10dp"
         android:text="Save"
-        android:textSize="21sp" />
+        android:textSize="21sp"
+        android:textStyle="bold" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

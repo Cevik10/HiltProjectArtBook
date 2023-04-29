@@ -50,6 +50,12 @@ class ArtDetailsFragment @Inject constructor(
         viewModel = ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
         subscribeToObservers()
 
+
+        binding.selectImageText.setOnClickListener {
+            val action = ArtDetailsFragmentDirections.actionArtDetailsFragmentToImageApiFragment()
+            findNavController().navigate(action)
+        }
+
         binding.artImageView.setOnClickListener {
             val action = ArtDetailsFragmentDirections.actionArtDetailsFragmentToImageApiFragment()
             findNavController().navigate(action)
@@ -59,14 +65,12 @@ class ArtDetailsFragment @Inject constructor(
 
 
         binding.saveButton.setOnClickListener {
-
             Log.d("system.out", "clicked button save")
             viewModel.makeArt(
                 binding.nameText.text.toString().trim(),
                 binding.artistText.text.toString().trim(),
                 binding.yearText.text.toString().trim()
             )
-
 
         }
 
@@ -77,6 +81,8 @@ class ArtDetailsFragment @Inject constructor(
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 findNavController().popBackStack()
+                viewModel.selectImageText.value = true
+                viewModel.selectImageView.value = false
             }
         }
 
@@ -88,7 +94,7 @@ class ArtDetailsFragment @Inject constructor(
 
         viewModel.selectedImageUrl.observe(viewLifecycleOwner, Observer { url ->
 
-            Log.d("system.out","callll ")
+            Log.d("system.out", "callll ")
 
             binding.let {
                 glide.load(url).into(it.artImageView)
@@ -114,6 +120,29 @@ class ArtDetailsFragment @Inject constructor(
 
             }
 
+        })
+
+
+        viewModel.selectImageText.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    binding.selectImageText.visibility = View.VISIBLE
+                } else {
+                    binding.selectImageText.visibility = View.GONE
+                }
+
+            }
+        })
+
+        viewModel.selectImageView.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    binding.artImageView.visibility = View.VISIBLE
+                } else {
+                    binding.artImageView.visibility = View.GONE
+                }
+
+            }
         })
 
 
