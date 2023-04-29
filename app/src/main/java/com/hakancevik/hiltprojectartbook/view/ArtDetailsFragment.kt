@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
@@ -50,6 +51,7 @@ class ArtDetailsFragment @Inject constructor(
         viewModel = ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
         subscribeToObservers()
 
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         binding.selectImageText.setOnClickListener {
             val action = ArtDetailsFragmentDirections.actionArtDetailsFragmentToImageApiFragment()

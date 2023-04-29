@@ -2,6 +2,7 @@ package com.hakancevik.hiltprojectartbook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import com.hakancevik.hiltprojectartbook.common.ArtFragmentFactory
 import com.hakancevik.hiltprojectartbook.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
