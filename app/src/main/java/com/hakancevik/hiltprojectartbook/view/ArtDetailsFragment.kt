@@ -12,10 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
-import com.hakancevik.hiltprojectartbook.R
 import com.hakancevik.hiltprojectartbook.databinding.FragmentArtDetailsBinding
 import com.hakancevik.hiltprojectartbook.util.Status
-import com.hakancevik.hiltprojectartbook.viewmodel.ArtDetailsViewModel
+import com.hakancevik.hiltprojectartbook.viewmodel.ArtViewModel
+
+
 import javax.inject.Inject
 
 class ArtDetailsFragment @Inject constructor(
@@ -26,7 +27,7 @@ class ArtDetailsFragment @Inject constructor(
     private var _binding: FragmentArtDetailsBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: ArtDetailsViewModel
+    lateinit var viewModel: ArtViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,8 @@ class ArtDetailsFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(ArtDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
+        subscribeToObservers()
 
         binding.artImageView.setOnClickListener {
             val action = ArtDetailsFragmentDirections.actionArtDetailsFragmentToImageApiFragment()
@@ -57,11 +59,15 @@ class ArtDetailsFragment @Inject constructor(
 
 
         binding.saveButton.setOnClickListener {
+
+            Log.d("system.out", "clicked button save")
             viewModel.makeArt(
                 binding.nameText.text.toString().trim(),
                 binding.artistText.text.toString().trim(),
                 binding.yearText.text.toString().trim()
             )
+
+
         }
 
 
@@ -78,9 +84,12 @@ class ArtDetailsFragment @Inject constructor(
     }
 
 
-    fun subscribeToObservers() {
+    private fun subscribeToObservers() {
 
         viewModel.selectedImageUrl.observe(viewLifecycleOwner, Observer { url ->
+
+            Log.d("system.out","callll ")
+
             binding.let {
                 glide.load(url).into(it.artImageView)
             }

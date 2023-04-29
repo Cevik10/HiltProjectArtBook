@@ -9,16 +9,16 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.hakancevik.hiltprojectartbook.R
 import com.hakancevik.hiltprojectartbook.adapter.ImageRecyclerAdapter
 import com.hakancevik.hiltprojectartbook.databinding.FragmentImageApiBinding
-import com.hakancevik.hiltprojectartbook.model.ImageResult
+
 import com.hakancevik.hiltprojectartbook.util.Status
-import com.hakancevik.hiltprojectartbook.viewmodel.ImageApiViewModel
+import com.hakancevik.hiltprojectartbook.viewmodel.ArtViewModel
+
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class ImageApiFragment @Inject constructor(
     private var _binding: FragmentImageApiBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: ImageApiViewModel
+    lateinit var viewModel: ArtViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class ImageApiFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(ImageApiViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
         subscribeToObservers()
 
 

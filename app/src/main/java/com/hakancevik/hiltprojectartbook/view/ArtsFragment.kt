@@ -1,6 +1,5 @@
 package com.hakancevik.hiltprojectartbook.view
 
-import android.content.ClipData.Item
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hakancevik.hiltprojectartbook.adapter.ArtRecyclerAdapter
 
 import com.hakancevik.hiltprojectartbook.databinding.FragmentArtsBinding
-import com.hakancevik.hiltprojectartbook.viewmodel.ArtsViewModel
+import com.hakancevik.hiltprojectartbook.viewmodel.ArtViewModel
+
+
 import javax.inject.Inject
 
 class ArtsFragment @Inject constructor(
@@ -26,9 +27,9 @@ class ArtsFragment @Inject constructor(
     private var _binding: FragmentArtsBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: ArtsViewModel
+    lateinit var viewModel: ArtViewModel
 
-    private val swipeCallBack = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.RIGHT) {
+    private val swipeCallBack = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             return true
         }
@@ -60,7 +61,7 @@ class ArtsFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(ArtsViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(ArtViewModel::class.java)
 
         subscribeToObservers()
 

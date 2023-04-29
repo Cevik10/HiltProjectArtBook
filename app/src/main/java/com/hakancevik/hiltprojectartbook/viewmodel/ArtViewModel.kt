@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hakancevik.hiltprojectartbook.model.Art
+import com.hakancevik.hiltprojectartbook.model.ImageResponse
 import com.hakancevik.hiltprojectartbook.repo.ArtRepositoryInterface
 import com.hakancevik.hiltprojectartbook.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,12 +13,16 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-
 @HiltViewModel
-class ArtDetailsViewModel @Inject constructor(
-    private val repository: ArtRepositoryInterface
+class ArtViewModel @Inject constructor(
+    val repository: ArtRepositoryInterface
 ) : ViewModel() {
 
+    val artList = repository.getArt()
+
+    fun deleteArt(art: Art) = viewModelScope.launch {
+        repository.deleteArt(art)
+    }
 
     private var insertArtMsg = MutableLiveData<Resource<Art>>()
     val inserArtMessage: LiveData<Resource<Art>>
@@ -26,11 +31,6 @@ class ArtDetailsViewModel @Inject constructor(
 
     fun resetInsertArtMsg() {
         insertArtMsg = MutableLiveData<Resource<Art>>()
-    }
-
-
-    fun deleteArt(art: Art) = viewModelScope.launch {
-        repository.deleteArt(art)
     }
 
 
@@ -68,5 +68,23 @@ class ArtDetailsViewModel @Inject constructor(
 
     }
 
+
+    private val images = MutableLiveData<Resource<ImageResponse>>()
+    val imageList: LiveData<Resource<ImageResponse>>
+        get() = images
+
+
+    fun searchForImage(searchString: String) {
+        if (searchString.isEmpty()) {
+            return
+        }
+
+        images.value = Resource.loading(null)
+        viewModelScope.launch {
+            val response = repository.searchImage(searchString)
+            images.value = response
+        }
+
+    }
 
 }
