@@ -27,9 +27,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectRoomDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context, ArtDatabase::class.java, "ArtBookDB"
-    ).build()
+    fun injectRoomDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(
+            context, ArtDatabase::class.java, "ArtBookDB"
+        ).build()
 
     @Singleton
     @Provides
